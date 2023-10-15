@@ -1,78 +1,88 @@
-let choices = {
-	1: "rock",
-	2: "paper",
-	3: "scissors"
+// Variable declarations and element getting
+const main = document.querySelector('#main');
+const div = document.createElement('div');
+const h2 = document.createElement('h2');
+const p = document.createElement('p');
+const startButton = document.querySelector('#start-button');
+let numberOfWins;
+let	computerScore = 0;
+let playerScore = 0;
+
+
+// Function definitions
+function startGame () {
+	numberOfWins = document.querySelector('#number-of-wins').value;
+	main.innerHTML = '';
+
+	buildGameScreen();
 }
 
-// Ask the user for their choice
+function buildGameScreen() {
 
-function getUserChoice () {
-	let userChoice = prompt ("What do you choose? (1-Rock 2-Paper 3-Scissors)")
-	if (Number(userChoice) === 1 || Number(userChoice) === 2 || Number(userChoice) === 3) {
-		return choices [userChoice]
+	const computerCards = div.cloneNode();
+	main.appendChild(computerCards);
+	computerCards.classList.add('computer-cards')
+
+	const score = div.cloneNode();
+	main.appendChild(score);
+	score.classList.add('score')
+
+	const playerCards = div.cloneNode();
+	main.appendChild(playerCards);
+	playerCards.classList.add('player-cards')
+
+	for (let i = 1; i <= 3; i++) {
+		computerCards.appendChild(div.cloneNode());
+		playerCards.appendChild(div.cloneNode());
+		if (i === 1) {
+			computerCards.childNodes[i-1].classList.add('rock');
+			computerCards.childNodes[i-1].innerHTML = `<img src="images/rock.png" alt="Rock" width="100px">`;
+
+			playerCards.childNodes[i-1].classList.add('rock');
+			playerCards.childNodes[i-1].innerHTML = `<img src="images/rock.png" alt="Rock" width="100px">`;
+		}
+		if (i === 2) {
+			computerCards.childNodes[i-1].classList.add('paper');
+			computerCards.childNodes[i-1].innerHTML = `<img src="images/paper.png" alt="Paper" width="100px">`;
+
+			playerCards.childNodes[i-1].classList.add('paper');
+			playerCards.childNodes[i-1].innerHTML = `<img src="images/paper.png" alt="Paper" width="100px">`;
+		}
+		if (i === 3) {
+			computerCards.childNodes[i-1].classList.add('scissors');
+			computerCards.childNodes[i-1].innerHTML = `<img src="images/scissors.png" alt="Scissors" width="100px">`;
+
+			playerCards.childNodes[i-1].classList.add('scissors');
+			playerCards.childNodes[i-1].innerHTML = `<img src="images/scissors.png" alt="Scissors" width="100px">`;
+		}
 	}
-	else if (userChoice.toLowerCase() === choices[1] || userChoice.toLowerCase() === choices[2] || userChoice.toLowerCase() === choices[3]) {
-		return userChoice.toLowerCase();
-	}
-	else {
-		alert ('Please Enter a valid choice!')
-		return
-	}
+
+	score.appendChild(h2.cloneNode());
+	score.childNodes[0].textContent = 'SCORE!'
+	score.appendChild(div.cloneNode());
+	const currentScore = score.childNodes[1];
+	currentScore.classList.add('current-score');
+	currentScore.appendChild(p.cloneNode());
+	currentScore.appendChild(p.cloneNode());
+	currentScore.childNodes[0].classList.add('player-score');
+	currentScore.childNodes[1].classList.add('computer-score');
+	setPlayerScore(playerScore);
+	setComputerScore(computerScore);
+	const winCon = p.cloneNode();
+	winCon.classList.add('win-condition');
+	score.appendChild(winCon);
+	winCon.innerText = 'The first to win ' + numberOfWins + ' rounds wins the game!';
 }
 
-// calculate the computer's choice
 
-function getComputerChoice () {
-	let computerChoice = Math.ceil(Math.random()*3);
-	return choices[computerChoice];
+function setPlayerScore (score) {
+	document.querySelector('.current-score .player-score').innerHTML = `Player score<br>` + score;
+}
+function setComputerScore (score) {
+	document.querySelector('.current-score .computer-score').innerHTML = `Computer score<br>` + score
 }
 
-// compare the two choices and anounce the winner of the round
+// Event listeners
+startButton.addEventListener('click', startGame);
 
-function compare (userChoice, computerChoice) {
-	console.log("\n");
-	console.log("\n");
-	console.log (`You chose: ` + userChoice);
-	console.log (`Computer chose: ` + computerChoice);
-	console.log("\n");
-	console.log("\n");
-	if (userChoice === computerChoice) {
-		console.log (`It's a tie! :/`)
-	}
-	else if ((userChoice === "rock" && computerChoice === "scissors") || (userChoice === "paper" && computerChoice === "rock") || (userChoice === "scissors" && computerChoice === "paper")) {
-		console.log (`You won! `+ userChoice +` beats `+ computerChoice +` :D`);
-		console.log("\n");
-		return ("user");
-	}
-	else {
-		console.log (`You lost! `+computerChoice +` beats `+ userChoice +` :(`)
-		console.log("\n");
-		return ("computer");
-	}
-}
-
-// tally & game
-
-let gameOn = true;
-let userScore = 0;
-let computerScore = 0;
-while (gameOn) {
-	let userChoice = getUserChoice();
-	let computerChoice = getComputerChoice();
-	let winner = compare (userChoice, computerChoice);
-	if (winner === "user") {
-		userScore++;
-	}
-	else if (winner === "computer") {
-		computerScore++;
-	}
-	console.log (`Current score:\nUser: ` + userScore + `|| Computer: ` + computerScore)
-	if (userScore === 5) {
-		console.info ("Congrats! You Won! :D")
-		gameOn = false;
-	}
-	if  (computerScore === 5) {
-		console.error ("Oh no! You lost.. D:")
-		gameOn = false;
-	}
-}
+// console.log(startButton)
