@@ -4,6 +4,7 @@ const div = document.createElement('div');
 const h2 = document.createElement('h2');
 const p = document.createElement('p');
 const startButton = document.querySelector('#start-button');
+const textInput = document.querySelector('#number-of-wins');
 let numberOfWins;
 let	computerScore = 0;
 let playerScore = 0;
@@ -11,10 +12,18 @@ let playerScore = 0;
 
 // Function definitions
 function startGame () {
-	numberOfWins = document.querySelector('#number-of-wins').value;
-	main.innerHTML = '';
+	
+	if (Number.isInteger(parseInt(textInput.value)) && !isNaN(parseInt(textInput.value))) {
+		numberOfWins = textInput.value;
+		main.innerHTML = '';
 
-	buildGameScreen();
+		buildGameScreen();
+	}
+	else {
+		alert('Please input a valid (whole) number.')
+		numberOfWins = textInput.value = '';
+
+	}
 }
 
 function buildGameScreen() {
@@ -84,5 +93,10 @@ function setComputerScore (score) {
 
 // Event listeners
 startButton.addEventListener('click', startGame);
+textInput.addEventListener('keydown', (event) => {
+	if (event.keyCode === 13) {
+		startButton.click();
+	}
+})
 
 // console.log(startButton)

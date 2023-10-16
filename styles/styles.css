@@ -14,6 +14,14 @@
     border-radius: 15px;
 }
 
+.player-cards div img {
+    transform: rotateY(180deg);
+}
+
+.player-cards .scissors img {
+    transform: rotateX(180deg);
+}
+
 .player-cards > *:hover, .computer-cards > *:hover {
     transform: scale(1.03);
 }
