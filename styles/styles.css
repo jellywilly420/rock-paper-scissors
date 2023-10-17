@@ -8,7 +8,15 @@
     justify-content: center;
     gap: 2rem;
 }
-
+.player-cards {
+	margin-top: 3rem;
+}
+.computer-cards {
+	margin-bottom: 3rem;
+}
+.invisible {
+	display: none;
+}
 .player-cards > *, .computer-cards > * {
     background-color: blanchedalmond;
     border-radius: 15px;
@@ -28,20 +36,30 @@
 .selected {
 	scale: 1.1;
 	box-shadow: 2px 2px 10px slategrey;
+	transition: scale 0.4s ease-in-out;
 }
 .player-cards .selected {
 	transform: translateY(-10px);
+	transition: translateY 0.4s ease-in-out;
 }
 .computer-cards .selected {
 	transform: translateY(10px);
+	transition: translateX 0.4s ease-in-out;
 }
-
+.score {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .score h2, .score p {
     text-align: center;
+}
+.score a {
+	margin: 0 auto;
 }
 
 .current-score {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    gap: 2rem;
 }
