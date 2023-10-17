@@ -21,7 +21,7 @@ function startGame () {
 		numberOfWins = textInput.value;
 		main.innerHTML = '';
 
-		buildGameScreen();
+		buildGame();
 	}
 	else {
 		alert('Please input a valid (whole) number.')
@@ -30,7 +30,7 @@ function startGame () {
 	}
 }
 
-function buildGameScreen() {
+function buildGame() {
 
 	let computerCards = div.cloneNode();
 	main.appendChild(computerCards);
@@ -89,26 +89,39 @@ function buildGameScreen() {
 	score.appendChild(winCon);
 	winCon.innerText = 'The first to win ' + numberOfWins + ' rounds wins the game!';
 
+
+	function compareChoices() {
+			if (playerChoice === computerChoice) {
+				return;
+			}
+			else if ((playerChoice === 'rock' && computerChoice === 'scissors') || (playerChoice === 'paper' && computerChoice === 'rock') || (playerChoice === 'scissors' && computerChoice === 'rock')) {
+				return playerChoice;
+			}
+			else {
+				return computerChoice;
+			}
+	}
+
+	function getChoices() {
+		computerChoice = getComputerChoice();
+		playerCards.childNodes.forEach((card) => {
+			card.addEventListener('click', () => {
+				if (noCardsSelected()) {
+					playerChoice = card.classList[0];
+					document.querySelector('.player-cards .' + playerChoice).classList.add('selected')
+					computerCards.childNodes.forEach((card) => {
+						if (card.classList.contains(computerChoice)) {
+							card.classList.add('selected')
+						}
+					})
+				}
+			})
+		})
+	}
+
 	function noCardsSelected() {
 		return !playerCards.childNodes[0].classList.contains('selected') && !playerCards.childNodes[1].classList.contains('selected') && !playerCards.childNodes[2].classList.contains('selected')
 	}
-
-	computerChoice = getComputerChoice();
-	playerCards.childNodes.forEach((card) => {
-		card.addEventListener('click', () => {
-			if (noCardsSelected()) {
-				playerChoice = card.classList[0];
-				document.querySelector('.player-cards .' + playerChoice).classList.add('selected')
-				computerCards.childNodes.forEach((card) => {
-				if (card.classList.contains(computerChoice)) {
-					card.classList.add('selected')
-				}
-		})
-			}
-		})
-	})
-
-
 }
 
 
@@ -129,3 +142,5 @@ textInput.addEventListener('keydown', (event) => {
 		startButton.click();
 	}
 })
+
+
