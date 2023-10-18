@@ -32,6 +32,9 @@ function startGame () {
 }
 
 function buildGame() {
+	const cScoreTitle = h2.cloneNode();
+	main.appendChild(cScoreTitle)
+	cScoreTitle.innerText = 'COMPUTER CHOICE';
 	let computerCards = div.cloneNode();
 	main.appendChild(computerCards);
 	computerCards.classList.add('computer-cards')
@@ -39,6 +42,10 @@ function buildGame() {
 	const score = div.cloneNode();
 	main.appendChild(score);
 	score.classList.add('score')
+
+	const pScoreTitle = h2.cloneNode();
+	main.appendChild(pScoreTitle)
+	pScoreTitle.innerText = 'YOUR CHOICE';
 
 	let playerCards = div.cloneNode();
 	main.appendChild(playerCards);
@@ -77,7 +84,7 @@ function buildGame() {
 	score.appendChild(lastRoundResult);
 	score.appendChild(nextRoundButton);
 	score.appendChild(h2.cloneNode());
-	score.childNodes[2].textContent = 'SCORE!' // is the h2 inside of .score
+	score.childNodes[2].textContent = 'SCORE' // is the h2 inside of .score
 	score.appendChild(currentScore);
 
 	lastRoundResult.classList.add('last-round-result')
@@ -86,6 +93,12 @@ function buildGame() {
 	nextRoundButton.setAttribute('href', '#')
 	nextRoundButton.classList.add('invisible');
 	nextRoundButton.addEventListener('click', () => {
+		if (lastRoundResult.classList.contains('red-color')) {
+			lastRoundResult.classList.toggle('red-color');
+		}
+		else if (lastRoundResult.classList.contains('green-color')) {
+			lastRoundResult.classList.toggle('green-color');
+		}
 		lastRoundResult.classList.toggle('invisible');
 		playerCards.childNodes.forEach((card) => {
 			if (card.classList.contains('selected')) {
@@ -132,12 +145,14 @@ function buildGame() {
 					let winner = compareChoices();
 					if (winner === playerChoice) {
 						playerScore++;
+						lastRoundResult.classList.add('green-color');
 						setPlayerScore();
 						lastRoundResult.innerText = playerChoice + ' beats ' + computerChoice + '. You win this round!';
 					}
 					else if (winner === computerChoice) {
 						computerScore++;
 						setComputerScore();
+						lastRoundResult.classList.add('red-color');
 						lastRoundResult.innerText = computerChoice + ' beats ' + playerChoice + '. Computer wins this round!';
 					}
 					else {
@@ -173,6 +188,12 @@ function buildGame() {
 						}
 						else {
 							nextRoundButton.removeEventListener('click', () => {
+								if (lastRoundResult.classList.contains('red-color')) {
+									lastRoundResult.classList.toggle('red-color');
+								}
+								else if (lastRoundResult.classList.contains('green-color')) {
+									lastRoundResult.classList.toggle('green-color');
+								}
 								lastRoundResult.classList.toggle('invisible');
 								playerCards.childNodes.forEach((card) => {
 									if (card.classList.contains('selected')) {
