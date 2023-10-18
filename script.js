@@ -81,10 +81,12 @@ function buildGame() {
 	score.appendChild(currentScore);
 
 	lastRoundResult.classList.add('last-round-result')
+	lastRoundResult.classList.add('invisible');
 	nextRoundButton.innerText = 'NEXT ROUND';
 	nextRoundButton.setAttribute('href', '#')
 	nextRoundButton.classList.add('invisible');
 	nextRoundButton.addEventListener('click', () => {
+		lastRoundResult.classList.toggle('invisible');
 		playerCards.childNodes.forEach((card) => {
 			if (card.classList.contains('selected')) {
 				card.classList.toggle('selected');
@@ -128,8 +130,6 @@ function buildGame() {
 					})
 
 					let winner = compareChoices();
-					console.log(winner);
-
 					if (winner === playerChoice) {
 						playerScore++;
 						setPlayerScore();
@@ -143,6 +143,7 @@ function buildGame() {
 					else {
 						lastRoundResult.innerText = `It's a tie! No winners this round!`;
 					}
+					lastRoundResult.classList.toggle('invisible');
 
 					if ((computerScore < numberOfWins) && (playerScore < numberOfWins)) {
 						nextRoundButton.classList.toggle('invisible');
@@ -172,6 +173,7 @@ function buildGame() {
 						}
 						else {
 							nextRoundButton.removeEventListener('click', () => {
+								lastRoundResult.classList.toggle('invisible');
 								playerCards.childNodes.forEach((card) => {
 									if (card.classList.contains('selected')) {
 										card.classList.toggle('selected');

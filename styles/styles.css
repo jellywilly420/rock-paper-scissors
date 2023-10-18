@@ -1,7 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 * {
     padding: 0;
     margin: 0;
 }
+:root {
+	--darker-color: #272829;
+	--dark-color: #61677A;
+	--light-color: #D8D9DA;
+	--lighter-color: #FFF6E0;
+}
+body {
+	font-family: 'Oswald', sans-serif;
+	height: 100svh;
+	background-color: var(--light-color);
+}
+h2, p {
+	cursor: default;
+}
+#main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 4rem 2rem;
+}
+#title {
+	width: 60%;
+	margin-bottom: 3.8rem;
+}
+#title h2 {
+	font-size: 3.3rem;
+	color: var(--darker-color);
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-color: var(--dark-color);
+	text-decoration-thickness: 10px;
+	text-shadow: 2px 2px 6px var(--dark-color);
+	margin: .5rem 0;
+}
+#title h2#rock {
+	text-align: center;
+}
+#title h2#paper {
+	text-align:	left;
+}
+#title h2#scissors {
+	text-align: right;
+}
+#setup {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+label {
+	font-size: 1.4rem;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: var(--darker-color);
+	gap: 1.5rem;
+}
+#number-of-wins {
+	background-color: var(--lighter-color);
+	width: 65px;
+	height: 40px;
+	border-radius: 10px;
+	font-size: 2rem;
+	text-align: center;
+	border: 3px solid var(--darker-color);
+	margin-bottom: 1.5rem;
+}
+#number-of-wins:focus {
+	box-shadow: 2px 2px 5px var(--dark-color);
+}
+#number-of-wins:focus-visible {
+	outline: none;
+}
+#start-button {
+	background-color: var(--lighter-color);
+	cursor: default;
+	font-size: 2rem;
+	color: var(--darker-color);
+	border: 3px solid var(--darker-color);
+	border-radius: 10px;
+	text-decoration: none;
+	padding: .75rem 2rem;
+	font-weight: bolder;
+	transition: scale 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+#start-button:hover {
+	scale: 1.07;
+	box-shadow: 0px 0px 10px var(--dark-color);
+}
+
 .player-cards, .computer-cards {
     display: flex;
     flex-direction: row;
