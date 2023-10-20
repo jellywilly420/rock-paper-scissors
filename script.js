@@ -56,24 +56,24 @@ function buildGame() {
 		playerCards.appendChild(div.cloneNode());
 		if (i === 1) {
 			computerCards.childNodes[i-1].classList.add('rock');
-			computerCards.childNodes[i-1].innerHTML = `<img src="images/rock.png" alt="Rock" width="100px">`;
+			computerCards.childNodes[i-1].innerHTML = `<img src="images/rock.png" alt="Rock" width="80px">`;
 
 			playerCards.childNodes[i-1].classList.add('rock');
-			playerCards.childNodes[i-1].innerHTML = `<img src="images/rock.png" alt="Rock" width="100px">`;
+			playerCards.childNodes[i-1].innerHTML = `<img src="images/rock.png" alt="Rock" width="80px">`;
 		}
 		if (i === 2) {
 			computerCards.childNodes[i-1].classList.add('paper');
-			computerCards.childNodes[i-1].innerHTML = `<img src="images/paper.png" alt="Paper" width="100px">`;
+			computerCards.childNodes[i-1].innerHTML = `<img src="images/paper.png" alt="Paper" width="80px">`;
 
 			playerCards.childNodes[i-1].classList.add('paper');
-			playerCards.childNodes[i-1].innerHTML = `<img src="images/paper.png" alt="Paper" width="100px">`;
+			playerCards.childNodes[i-1].innerHTML = `<img src="images/paper.png" alt="Paper" width="80px">`;
 		}
 		if (i === 3) {
 			computerCards.childNodes[i-1].classList.add('scissors');
-			computerCards.childNodes[i-1].innerHTML = `<img src="images/scissors.png" alt="Scissors" width="100px">`;
+			computerCards.childNodes[i-1].innerHTML = `<img src="images/scissors.png" alt="Scissors" width="80px">`;
 
 			playerCards.childNodes[i-1].classList.add('scissors');
-			playerCards.childNodes[i-1].innerHTML = `<img src="images/scissors.png" alt="Scissors" width="100px">`;
+			playerCards.childNodes[i-1].innerHTML = `<img src="images/scissors.png" alt="Scissors" width="80px">`;
 		}
 	}
 	const lastRoundResult = p.cloneNode();
@@ -81,16 +81,15 @@ function buildGame() {
 	const nextRoundButton = a.cloneNode();
 	const winCon = p.cloneNode();
 
+	score.appendChild(h2.cloneNode());
+	score.appendChild(currentScore);
+	score.appendChild(winCon);
 	score.appendChild(lastRoundResult);
 	score.appendChild(nextRoundButton);
-	score.appendChild(h2.cloneNode());
-	score.childNodes[2].textContent = 'SCORE' // is the h2 inside of .score
-	score.appendChild(currentScore);
 
 	lastRoundResult.classList.add('last-round-result')
 	lastRoundResult.classList.add('invisible');
 	nextRoundButton.innerText = 'NEXT ROUND';
-	nextRoundButton.setAttribute('href', '#')
 	nextRoundButton.classList.add('invisible');
 	nextRoundButton.addEventListener('click', () => {
 		if (lastRoundResult.classList.contains('red-color')) {
@@ -122,8 +121,8 @@ function buildGame() {
 	setPlayerScore(playerScore);
 	setComputerScore(computerScore);
 	winCon.classList.add('win-condition');
-	score.appendChild(winCon);
 	winCon.innerText = 'The first to win ' + numberOfWins + ' rounds wins the game!';
+	score.querySelector('h2').textContent = 'SCORE'
 
 
 	playRound();
@@ -156,7 +155,8 @@ function buildGame() {
 						lastRoundResult.innerText = computerChoice + ' beats ' + playerChoice + '. Computer wins this round!';
 					}
 					else {
-						lastRoundResult.innerText = `It's a tie! No winners this round!`;
+						lastRoundResult.innerText = `It's a tie!
+						No winners this round!`;
 					}
 					lastRoundResult.classList.toggle('invisible');
 

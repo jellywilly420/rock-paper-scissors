@@ -14,9 +14,7 @@
 body {
 	font-family: 'Oswald', sans-serif;
 	background-color: var(--light-color);
-	height: 100svh;
 	display: flex;
-	flex-direction: column;
 	justify-content: space-around;
 }
 h2, p {
@@ -27,6 +25,10 @@ h2, p {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
+	margin-top: 1.5rem;
+}
+#main > h2 {
+	margin-bottom: 1rem;
 }
 #title {
 	width: 65%;
@@ -104,19 +106,12 @@ label {
 }
 
 
-
-
 .player-cards, .computer-cards {
     display: flex;
     flex-direction: row;
     justify-content: center;
-   	gap: .25rem;
-}
-.player-cards {
-	margin-top: 3rem;
-}
-.computer-cards {
-	margin-bottom: 3rem;
+	width: 100%;
+	gap: 1.5rem;
 }
 
 .player-cards > *, .computer-cards > * {
@@ -127,13 +122,13 @@ label {
 }
 
 .player-cards .selected {
-	transform: translateY(-20px);
+	transform: translateY(-15px);
 }
 .computer-cards .selected {
-	transform: translateY(20px);
+	transform: translateY(15px);
 }
 .player-cards > *:hover, .selected {
-    scale: 1.15;
+    scale: 1.1;
     box-shadow: 0 0 10px var(--darker-color);
 }
 
@@ -144,30 +139,27 @@ label {
     transform: rotateX(180deg);
 }
 
-
 .invisible {
 	visibility: hidden;
 }
 
-
-
 .score {
 	background-color: var(--lighter-color);
-	width: 95%;
 	border-radius: 20px;
 	border: 3px solid var(--dark-color);
-	padding: 1rem 0 2rem;
+	padding: .5rem 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin: 1.5rem;
+	width: 300px;
 }
 .score h2, .score p {
     text-align: center;
 }
 .score h2 {
-	font-size: 2.5rem;
+	font-size: 2rem;
 	text-decoration: underline;
-	margin-bottom: .75rem;
 }
 .score p {
 	font-size: 1.5rem;
@@ -190,13 +182,15 @@ label {
 	padding: .35rem 1rem;
 	font-weight: bolder;
 }
-
 .current-score {
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    margin: .75rem 0;
 }
 .computer-score, .player-score {
 	border-radius: 20px;
+}
+.last-round-result {
+	width: 100%;
+	border-top: 2px solid var(--darker-color);
 }
